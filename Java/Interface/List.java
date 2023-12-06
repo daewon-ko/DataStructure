@@ -6,7 +6,7 @@ public interface List <E> {
 
     void add(int index, E value);
 
-    void remove(int index);
+    E remove(int index);
 
     boolean remove(Object value);
 
@@ -20,6 +20,11 @@ public interface List <E> {
     int size();
 
     boolean isEmpty();
+
+    E set(int index, E value);
+
+    int lastIndexOf(E value);
+
 
     public void clear();
 
