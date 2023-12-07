@@ -3,3 +3,6 @@ Java/DataStructure.iml
 Java/Interface/.idea/
 Java/Interface/Interface.iml
 Java/Interface/out/
+# .gitignore
+.idea/misc.xml
+.idea/vcs.xml
