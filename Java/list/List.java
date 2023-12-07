@@ -1,4 +1,4 @@
-package Java.Interface;
+package Java.list;
 
 public interface List <E> {
 

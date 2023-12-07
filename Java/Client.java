@@ -1,4 +1,6 @@
-package Java.Interface;
+package Java;
+
+import Java.list.arraylist.ArrayList;
 
 public class Client {
     public static void main(String[] args) {
