@@ -35,6 +35,10 @@ public class SinglyLinkedList<E> implements List<E> {
 
         Node<E> x = head;   // head라고 상정
 
+        /**
+         * x.next는 null로 초기화 되어있지 않나?
+         * List자체가 아무 것도 없을 경우에 NULL QKSGHKS
+         */
         for (int count = 0; count < index; count++) {
             x = x.next;
         }
@@ -43,17 +47,61 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     public void addFirst(E value) {
-        
+        Node<E> newNode = new Node<>(value);
+        newNode.next = head;
+        head = newNode;
+        size++;
 
+        /**
+         * if Node가 null일 경우
+         * Node의 tail과 head가 같다.
+         */
+        if (newNode.next == null) {
+            tail = head;
+        }
     }
 
+    /**
+     * add는 사실상 addLast와 같고 Java에서 제공하는 add의 일반적인 기능이
+     *
+     * @param value
+     * @return
+     */
     @Override
     public boolean add(final E value) {
-        return false;
+        Node<E> newNode = new Node<E>(value);
+        if (size == 0) {
+            addFirst(value);
+            return true;
+        }
+        tail.next = newNode;
+        tail = newNode;
+        size++;
+        return true;
     }
 
     @Override
     public void add(final int index, final E value) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index == 0) {
+            addFirst(value);
+            return;
+        }
+        if (index == size) {
+            add(value);
+            return;
+        }
+        Node<E> preNode = search(index - 1);
+        Node<E> nextNode = preNode.next;
+
+        Node<E> newNode = new Node<>(value);
+
+        preNode.next = null;
+        preNode.next = newNode;
+        newNode.next = nextNode;
+        size++;
 
     }
 
