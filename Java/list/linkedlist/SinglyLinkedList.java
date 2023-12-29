@@ -117,11 +117,12 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public E get(final int index) {
-        return null;
+        return search(index).data;
     }
 
     @Override
     public boolean contains(final Object value) {
+
         return false;
     }
 
