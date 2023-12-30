@@ -3,6 +3,8 @@ package Java.list.linkedlist;
 import Java.Node;
 import Java.list.List;
 
+import java.util.NoSuchElementException;
+
 /**
  * 자바에는 SinglyLinkedList라는 클래스는 존재하지 않지만, 개념적으로는
  * LinkedList와 유사하다.
@@ -104,10 +106,60 @@ public class SinglyLinkedList<E> implements List<E> {
         size++;
 
     }
+    public E remove() {
+        Node<E> headNode = head;
+        // head를 조회했으나 null일 경우 Exception을 던진다.
+        if (headNode == null) {
+            throw new NoSuchElementException();
+        }
+
+        E element = headNode.data;
+        Node<E> nextNode = headNode.next;
+
+        headNode.next = null;
+        headNode.data = null;
+
+        head = nextNode;
+        size--;
+
+        if (size == 0) {
+            tail = null;
+        }
+        return element;
+
+
+    }
 
     @Override
-    public E remove(final int index) {
-        return null;
+    public E remove(final int index){
+        if (index == 0) {
+            remove();
+        }
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException();
+        }
+
+        Node<E> prevNode = search(index - 1);
+        Node<E> removedNode = prevNode.next;
+        Node<E> nextNode = removedNode.next;
+
+        // 삭제될 Data
+        E element = removedNode.data;
+
+        // 이전 노드의 다음을 nextNode로 변경
+        prevNode.next = nextNode;
+        // 삭제 data가 null일경우
+        // TODO : 삭제 data가 null이라는 말의 의미가 무엇일까?
+        if (removedNode.next == null) {
+            tail = prevNode;
+        }
+
+        removedNode.data = null;
+        removedNode.next = null;
+        size --;
+        return element;
+
+
     }
 
     @Override
