@@ -164,6 +164,7 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(final Object value) {
+
         return false;
     }
 
@@ -195,7 +196,9 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public E set(final int index, final E value) {
-        return null;
+
+        Node<E> objectNode = search(index);
+        return objectNode.data = value;
     }
 
     @Override
