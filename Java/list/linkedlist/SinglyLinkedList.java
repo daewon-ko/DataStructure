@@ -181,7 +181,15 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public int indexOf(final Object value) {
-        return 0;
+        int index = 0;
+        for (Node<E> x = head; x != null; x = x.next) {
+            if (x.data.equals(value)) {
+                return index;
+            }
+            index++;
+        }
+        // 불만족시 -1 return
+        return -1;
     }
 
     @Override
