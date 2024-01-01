@@ -176,6 +176,14 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public boolean contains(final Object value) {
 
+//        아래 메서드와 동일한 결과를 Return
+//        return indexOf(value) >= 0 ? true : false;
+
+            for(Node<E> x = head; x != null; x = x.next) {
+            if (x.data.equals(value)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -194,12 +202,14 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public int size() {
-        return 0;
+
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+
+        return size == 0;
     }
 
     @Override
@@ -216,6 +226,15 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void clear() {
+        for (Node<E> x = head; x != null; x = x.next) {
+            Node<E> nextNode = x.next;
+            x.data = null;
+            x.next = null;
+            x = nextNode;
+        }
+        head = tail = null;
+        size = 0;
+
 
     }
 }
