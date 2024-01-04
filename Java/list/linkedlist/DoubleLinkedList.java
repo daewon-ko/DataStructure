@@ -10,8 +10,8 @@ public class DoubleLinkedList<E> implements List<E> {
     // 기본 초기화
     // 처음 DoubleLinkedList 초기화시에, 이전 Node와 이후 Node를 가리킬 수 없다.
     public DoubleLinkedList() {
-        this.prev = null;
-        this.next = null;
+        this.head = null;
+        this.tail = null;
         this.size = 0;
     }
 
@@ -42,6 +42,24 @@ public class DoubleLinkedList<E> implements List<E> {
             return target;
         }
 
+
+    }
+
+
+    public void addFirst(E value) {
+        Node2<E> newNode = new Node2<>(value);
+        newNode.next = head;
+
+        if (head != null) {
+            head.prev = newNode;
+        }
+
+        head = newNode;
+        size++;
+
+        if (head.next == null) {
+            tail = head;
+        }
 
     }
 
