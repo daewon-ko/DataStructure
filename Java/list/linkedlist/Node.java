@@ -1,4 +1,4 @@
-package Java;
+package Java.list.linkedlist;
 
 public class Node <E>{
     public E data;

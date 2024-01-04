@@ -1,6 +1,5 @@
 package Java.list.linkedlist;
 
-import Java.Node;
 import Java.list.List;
 
 import java.util.NoSuchElementException;
