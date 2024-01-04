@@ -1,4 +1,107 @@
 package Java.list.linkedlist;
 
-public class DoubleLinkedList {
+import Java.list.List;
+
+public class DoubleLinkedList<E> implements List<E> {
+    private Node2<E> head;
+    private Node2<E> tail;
+    private int size;
+
+    // 기본 초기화
+    // 처음 DoubleLinkedList 초기화시에, 이전 Node와 이후 Node를 가리킬 수 없다.
+    public DoubleLinkedList() {
+        this.prev = null;
+        this.next = null;
+        this.size = 0;
+    }
+
+    /**
+     * 이전 SingleLinkedList와 같이 특정 index가 주어지면,
+     * Node를 찾아주는 메서드
+     *
+     * @param index
+     * @return
+     */
+
+    private Node2<E> search(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index + 1 > size / 2) {
+            Node2<E> target = tail;
+            for (int count = size - 1; count > index; count--) {
+                target = target.prev;
+            }
+            return target;
+        } else {
+            Node2<E> target = head;
+            for (int count = 0; count < index; count++) {
+                target = target.next;
+            }
+            return target;
+        }
+
+
+    }
+
+    @Override
+    public boolean add(final E value) {
+        return false;
+    }
+
+    @Override
+    public void add(final int index, final E value) {
+
+    }
+
+    @Override
+    public E remove(final int index) {
+        return null;
+    }
+
+    @Override
+    public boolean remove(final Object value) {
+        return false;
+    }
+
+    @Override
+    public E get(final int index) {
+        return null;
+    }
+
+    @Override
+    public boolean contains(final Object value) {
+        return false;
+    }
+
+    @Override
+    public int indexOf(final Object value) {
+        return 0;
+    }
+
+    @Override
+    public int size() {
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public E set(final int index, final E value) {
+        return null;
+    }
+
+    @Override
+    public int lastIndexOf(final E value) {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+
+    }
 }
