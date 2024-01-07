@@ -2,6 +2,8 @@ package Java.list.linkedlist;
 
 import Java.list.List;
 
+import java.util.NoSuchElementException;
+
 public class DoubleLinkedList<E> implements List<E> {
     private Node2<E> head;
     private Node2<E> tail;
@@ -111,6 +113,42 @@ public class DoubleLinkedList<E> implements List<E> {
         nextNode.prev = insertNode;
         size++;
 
+    }
+
+    /**
+     * 첫번째 INDEX Node를 삭제하는 메서드
+     * 실제 Java에서도 List Interface에는 없지만,
+     * LinkedList 클래스 내에는 존재한다.
+     * @return
+     */
+    public E remove() {
+        Node2<E> headNode = head;
+        // size가 0이면, 제거할 Node가 없으므로 exception를 던진다.
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+        Node2<E> nextNode = head.next;
+
+        // return할 element를 미리 꺼내놓는다.
+        E element = head.data;
+
+        // head의 data와 nextNode를 null를 입력한다.
+        head.data = null;
+        head.next = null;
+
+        // nextNode가 null이 아닐 시에 nextNode의 prev값을 null처리 해준다.
+        if (nextNode != null) {
+            nextNode.prev = null;
+        }
+
+        nextNode = head;
+        size--;
+
+        if (size == 0) {
+            tail = null;
+        }
+
+        return element;
     }
 
     @Override
