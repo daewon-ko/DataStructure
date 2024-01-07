@@ -2,6 +2,7 @@ package Java.list.linkedlist;
 
 import Java.list.List;
 
+import java.awt.desktop.AppReopenedEvent;
 import java.util.NoSuchElementException;
 
 public class DoubleLinkedList<E> implements List<E> {
@@ -153,12 +154,85 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public E remove(final int index) {
-        return null;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index == 0) {
+            E element = head.data;
+            remove();
+            return element;
+        }
+
+
+        Node2<E> prevNode = search(index - 1);
+        Node2<E> removedNode = prevNode.next;
+        Node2<E> nextNode = removedNode.next;
+
+        E element = removedNode.data;
+
+        prevNode = null;
+        removedNode.prev = null;
+        removedNode.next = null;
+        removedNode.data = null;
+
+        // prevNode의 경우, 위의 if문에서 index가 0인경우 조건처리를 해주므로 null일 수 없다.
+        if (nextNode != null) {
+            nextNode.prev = null;
+            nextNode.prev = prevNode;
+            prevNode.next = nextNode;
+        } else {
+            tail = prevNode;
+        }
+
+        size --;
+        return element;
     }
 
     @Override
     public boolean remove(final Object value) {
-        return false;
+        Node2<E> prevNode = head;
+        Node2<E> x = head;
+
+        for (; x != null; x = x.next) {
+            if (x.data.equals(value)) {
+                break;
+            }
+            prevNode = x;
+        }
+        if (x == null) {
+            return false;
+        }
+
+        if (x.equals(head)) {
+            remove();
+            return true;
+        } else {
+            Node2<E> nextNode = x.next;
+
+            /** prevNode의 경우 위의 if문에서 head와 일치하는 조건에 대한 분기가 있으므로
+             * null 체크가 필요없다.
+             */
+
+            prevNode.next = null;
+            x.data = null;
+            x.next = null;
+            x.prev = null;
+
+
+            if (nextNode != null) {
+                nextNode.prev = null;
+
+                prevNode.next = nextNode;
+                nextNode.prev = prevNode;
+            } else {
+                tail = prevNode;
+            }
+
+            size --;
+            return true;
+
+
+        }
     }
 
     @Override
