@@ -65,11 +65,51 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean add(final E value) {
-        return false;
+        Node2<E> newNode = new Node2<>(value);
+        if (size == 0) {
+            addFirst(value);
+            return true;
+        }
+        newNode = tail.next;
+        tail = newNode.prev;
+        newNode = tail;
+        size++;
+        return true;
     }
 
     @Override
     public void add(final int index, final E value) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index == 0) {
+            addFirst(value);
+            return;
+        }
+
+        if (index == size) {
+            add(value);
+            return;
+        }
+        Node2<E> newNode = new Node2<>(value);
+
+        Node2<E> prevNode = search(index - 1);
+        Node2<E> nextNode = prevNode.next;
+
+
+        // 링크해제
+        prevNode.next = null;
+        nextNode.prev = null;
+
+        Node2<E> insertNode = new Node2<>(value);
+
+        insertNode.prev = prevNode;
+        insertNode.next = nextNode;
+
+        prevNode.next = insertNode;
+        nextNode.prev = insertNode;
+        size++;
 
     }
 
