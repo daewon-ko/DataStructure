@@ -1,8 +1,9 @@
 package Java.stack;
 
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
-public class Stack<E> implements StackInterface {
+public class Stack<E> implements StackInterface<E>{
 
     private static final int DEFAULT_CAPACITY = 10;
     private static final Object[] EMPTY_ARRAY = {};
@@ -40,8 +41,9 @@ public class Stack<E> implements StackInterface {
         }
     }
 
+
     @Override
-    public Object push(final Object item) {
+    public E push(final E item) {
         if (size == array.length) {
             resize();
         }
@@ -51,12 +53,23 @@ public class Stack<E> implements StackInterface {
     }
 
     @Override
-    public Object pop() {
-        return null;
+    public E pop() {
+        if (size == 0) {
+            throw new EmptyStackException();
+        }
+
+
+        E obj = (E) array[size - 1];
+
+        array[size - 1] = null;
+        size--;
+        resize();
+
+        return obj;
     }
 
     @Override
-    public Object peek() {
+    public E peek() {
         return null;
     }
 
