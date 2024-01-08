@@ -295,6 +295,22 @@ public class DoubleLinkedList<E> implements List<E> {
     @Override
     public void clear() {
 
+        /**
+         * GC 메모리 최적화를 위해 순회하며 모두 null 처리
+         */
+        for (Node2<E> x = head; x != null; ) {
+            Node2<E> nextNode = x.next;
+
+            x.data = null;
+            x.next = null;
+            x.prev = null;
+
+            x = nextNode;
+        }
+
+        head = tail = null;
+        size = 0;
+
 
     }
 }
