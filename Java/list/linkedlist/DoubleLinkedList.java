@@ -237,7 +237,8 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public E get(final int index) {
-        return null;
+        return search(index).data;
+
     }
 
     @Override
@@ -247,7 +248,15 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public int indexOf(final Object value) {
-        return 0;
+        int index = 0;
+
+        for (Node2<E> x = head; x != null; x = x.next) {
+            if (value.equals(x.data)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
     }
 
     @Override
@@ -262,12 +271,23 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public E set(final int index, final E value) {
-        return null;
+        Node2<E> targetNode = search(index);
+        targetNode.data = null;
+        targetNode.data = value;
+        return value;
     }
 
     @Override
     public int lastIndexOf(final E value) {
-        return 0;
+        int index = size -1;
+
+        for (Node2<E> x = tail; x != null; x = x.prev) {
+            if (value.equals(x.data)) {
+                return index;
+            }
+            index--;
+        }
+        return -1;
     }
 
     @Override
