@@ -83,16 +83,20 @@ public class Stack<E> implements StackInterface<E>{
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public void clear() {
+        for (int i = 0; i < array.length; i++) {
+            array[i]= null;
+        }
+        size = 0;
 
     }
 
     @Override
     public boolean empty() {
-        return false;
+        return size == 0;
     }
 }
