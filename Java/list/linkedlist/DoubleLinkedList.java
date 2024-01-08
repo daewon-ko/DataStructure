@@ -243,7 +243,8 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean contains(final Object value) {
-        return false;
+
+        return indexOf(value) >= 0;
     }
 
     @Override
@@ -261,12 +262,13 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+
+        return size ==0;
     }
 
     @Override
@@ -292,6 +294,7 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public void clear() {
+
 
     }
 }
