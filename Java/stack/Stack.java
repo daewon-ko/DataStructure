@@ -78,6 +78,19 @@ public class Stack<E> implements StackInterface<E>{
 
     @Override
     public int search(final Object value) {
+        if (value == null) {
+            for (int i = size - 1; i >= 0; i--) {
+                if (array[i] == null) {
+                    return size - i;
+                }
+            }
+        } else {
+            for (int i = size - 1; i >= 0; i--) {
+                if (value.equals(array[i])) {
+                    return size -i;
+                }
+            }
+        }
         return 0;
     }
 
