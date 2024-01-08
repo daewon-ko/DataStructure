@@ -70,7 +70,10 @@ public class Stack<E> implements StackInterface<E>{
 
     @Override
     public E peek() {
-        return null;
+        if (size == 0) {
+            throw new EmptyStackException();
+        }
+        return (E)array[size - 1];
     }
 
     @Override
