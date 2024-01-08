@@ -42,7 +42,12 @@ public class Stack<E> implements StackInterface {
 
     @Override
     public Object push(final Object item) {
-        return null;
+        if (size == array.length) {
+            resize();
+        }
+        array[size] = item;
+        size++;
+        return item;
     }
 
     @Override
