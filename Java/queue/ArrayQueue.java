@@ -1,6 +1,6 @@
 package Java.queue;
 
-public class ArrayQueue implements Queue {
+public class ArrayQueue<E> implements Queue<E> {
 
     private static final int DEFAULT_CAPACITY = 64;
     private Object[] array;
@@ -40,18 +40,28 @@ public class ArrayQueue implements Queue {
         rear = size;
     }
 
+
+
     @Override
-    public boolean offer(final Object o) {
-        return false;
+    public boolean offer(final E e) {
+        int arrayCapacity = array.length;
+        // 용적이 가득찰 경우 resize()를 해준다.
+        if ((rear + 1) % arrayCapacity == front) {
+            resize(2* arrayCapacity);
+        }
+        rear = (rear + 1) % arrayCapacity;  // rear의 위치를 갱신한다.(원형으로 생각)
+        array[rear] = e;
+        size++;
+        return true;
     }
 
     @Override
-    public Object peek() {
+    public E peek() {
         return null;
     }
 
     @Override
-    public Object poll() {
+    public E poll() {
         return null;
     }
 }
