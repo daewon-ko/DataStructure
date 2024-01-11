@@ -1,5 +1,7 @@
 package Java.queue;
 
+import java.util.NoSuchElementException;
+
 public class ArrayQueue<E> implements Queue<E> {
 
     private static final int DEFAULT_CAPACITY = 64;
@@ -57,7 +59,12 @@ public class ArrayQueue<E> implements Queue<E> {
 
     @Override
     public E peek() {
-        return null;
+        if (size == 0) {
+            return null;
+        }
+        @SuppressWarnings("unchecked")
+        E item = (E) array[(front + 1) % array.length];
+        return item;
     }
 
     @Override
@@ -76,6 +83,15 @@ public class ArrayQueue<E> implements Queue<E> {
         // 배열의 용적이 64개보다 크면서 요소의 개수가 용적의 1/4에 못 미칠 때 resize()를 한다.
         if (array.length > DEFAULT_CAPACITY && size < (array.length / 4)) {
             resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
+        }
+        return item;
+    }
+
+    public E element() {
+        E item = peek();
+        // null 체크
+        if (item == null) {
+            throw new NoSuchElementException();
         }
         return item;
     }
