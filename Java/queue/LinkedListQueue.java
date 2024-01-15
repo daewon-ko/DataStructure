@@ -33,6 +33,18 @@ public class LinkedListQueue<E> implements Queue<E> {
 
     @Override
     public E poll() {
-        return null;
+        if (size == 0) {
+            return null;
+        }
+
+        E target = head.data;
+
+        head.data = null;
+        head.next = null;
+
+        head = head.next;
+
+        size--;
+        return target;
     }
 }
