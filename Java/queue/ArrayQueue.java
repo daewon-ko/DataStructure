@@ -95,4 +95,11 @@ public class ArrayQueue<E> implements Queue<E> {
         }
         return item;
     }
+
+    public int size() {
+        return size;
+    }
+    public boolean isEmpty() {
+        return size==0;
+    }
 }
