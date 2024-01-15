@@ -28,7 +28,10 @@ public class LinkedListQueue<E> implements Queue<E> {
 
     @Override
     public E peek() {
-        return null;
+        if (size == 0) {
+            return null;
+        }
+        return head.data;
     }
 
     @Override
@@ -46,5 +49,33 @@ public class LinkedListQueue<E> implements Queue<E> {
 
         size--;
         return target;
+    }
+
+    public int size() {
+        return size;
+    }
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean contains(Object value) {
+        for (Node<E> x = head; x != null; x = x.next) {
+            if (value.equals(x.data)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void clear() {
+        for (Node<E> x = head; x != null; ) {
+            Node<E> nextNode = x.next;
+            x.data = null;
+            x.next = null;
+            x = nextNode;
+        }
+
+        size = 0;
+        head = tail = null;
     }
 }
