@@ -1,5 +1,7 @@
 package Java.queue;
 
+import java.util.NoSuchElementException;
+
 public class ArrayDeque<E> implements Queue<E> {
 
     private static final int DEFAULT_CAPACITY = 64;
@@ -94,5 +96,17 @@ public class ArrayDeque<E> implements Queue<E> {
             resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
         }
         return target;
+    }
+
+    public E remove() {
+        return removeFirst();
+    }
+
+    public E removeFirst() {
+        E item = pollFirst();
+        if (item == null) {
+            throw new NoSuchElementException();
+        }
+        return item;
     }
 }
