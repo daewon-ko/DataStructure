@@ -35,11 +35,35 @@ public class ArrayDeque<E> implements Queue<E> {
         rear = size;
     }
 
+    public boolean offerLast(final E e) {
+
+        // 용적이 꽉찼을 경우 용적 2배로 resize
+        if ((rear + 1) % array.length == front) {
+            resize(2 * array.length);
+        }
+
+        rear = (rear + 1) % array.length;   // rear을 rear 다음 위치로 갱신
+        array[rear] = e;
+
+        size++;
+        return true;
+    }
 
     @Override
-
     public boolean offer(final E e) {
-        return false;
+        return offerLast(e);
+    }
+
+    public boolean offerFirst(E e) {
+        if ((front - 1 + array.length) % array.length == rear) {
+            resize(2 * array.length);
+        }
+
+        array[front] = e; // front는 애초에 빈 공간이기에 먼저 e를 넣어준다.
+        front = (front - 1 + array.length) % array.length;
+
+        size++;
+        return true;
     }
 
     @Override
