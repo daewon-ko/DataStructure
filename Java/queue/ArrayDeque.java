@@ -73,6 +73,26 @@ public class ArrayDeque<E> implements Queue<E> {
 
     @Override
     public E poll() {
-        return null;
+        return pollFirst();
+    }
+
+    public E pollFirst() {
+        // API상 Poll은 Null Return
+        if (size == 0) {
+            return null;
+        }
+        front = (front + 1) % array.length;
+
+        // 입출력이 모두 E Type에 한정된다.
+        @SuppressWarnings("unchecked")
+        E target = (E) array[front];
+
+        array[front] = null;
+        size --;
+
+        if (array.length > DEFAULT_CAPACITY && size < array.length / 2) {
+            resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
+        }
+        return target;
     }
 }
