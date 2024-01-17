@@ -70,7 +70,29 @@ public class ArrayDeque<E> implements Queue<E> {
 
     @Override
     public E peek() {
-        return null;
+        E target = peekFirst();
+        if (target == null) {
+            throw new NoSuchElementException();
+        }
+        return target;
+    }
+
+    public E peekFirst() {
+        if (size == 0) {
+            return null;
+        }
+        @SuppressWarnings("unchecked")
+        E target = (E)array[front + 1 % array.length];
+        return target;
+    }
+
+    public E peekLast() {
+        if (size == 0) {
+            return null;
+        }
+        @SuppressWarnings("unchecked")
+        E target = (E) array[rear];
+        return target;
     }
 
     @Override
