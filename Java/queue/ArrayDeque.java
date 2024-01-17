@@ -31,9 +31,9 @@ public class ArrayDeque<E> implements Queue<E> {
         for (int i = 1, j = front + 1; i <= size; i++, j++) {
             newArray[i] = array[j % arrayCapacity];
         }
-        this.array =  null;
+        this.array = null;
         this.array = newArray;
-        front= 0;
+        front = 0;
         rear = size;
     }
 
@@ -82,7 +82,7 @@ public class ArrayDeque<E> implements Queue<E> {
             return null;
         }
         @SuppressWarnings("unchecked")
-        E target = (E)array[front + 1 % array.length];
+        E target = (E) array[front + 1 % array.length];
         return target;
     }
 
@@ -112,7 +112,7 @@ public class ArrayDeque<E> implements Queue<E> {
         E target = (E) array[front];
 
         array[front] = null;
-        size --;
+        size--;
 
         if (array.length > DEFAULT_CAPACITY && size < array.length / 2) {
             resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
@@ -125,7 +125,7 @@ public class ArrayDeque<E> implements Queue<E> {
             return null;
         }
         @SuppressWarnings("unchecked")
-        E target = (E)array[rear];
+        E target = (E) array[rear];
         array[rear] = null;
 
         rear = (rear - 1 + array.length) % array.length;
@@ -157,5 +157,33 @@ public class ArrayDeque<E> implements Queue<E> {
             throw new NoSuchElementException();
         }
         return item;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+
+    // TODO : 파라미터로 E Type을 넣는게 적절할까?
+    // Object Type을 넣는 것은 부적절할까? 
+    public boolean contains(E e) {
+        int index = front + 1 % array.length;
+        for (int i = 0, j = index; i < size; i++, j = (j + 1) % array.length) {
+            if (e.equals((E)array[j])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void clear() {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = null;
+        }
+        rear = front = size = 0;
     }
 }
