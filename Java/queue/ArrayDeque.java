@@ -98,6 +98,33 @@ public class ArrayDeque<E> implements Queue<E> {
         return target;
     }
 
+    public E pollLast() {
+        if (size == 0) {
+            return null;
+        }
+        @SuppressWarnings("unchecked")
+        E target = (E)array[rear];
+        array[rear] = null;
+
+        rear = (rear - 1 + array.length) % array.length;
+        size--;
+
+        if (array.length > DEFAULT_CAPACITY && size < array.length / 2) {
+            resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
+        }
+
+        return target;
+
+    }
+
+    public E removeLast() {
+        E target = pollLast();
+        if (target == null) {
+            throw new NoSuchElementException();
+        }
+        return target;
+    }
+
     public E remove() {
         return removeFirst();
     }
